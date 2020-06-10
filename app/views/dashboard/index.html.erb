@@ -1,0 +1,97 @@
+<div class="container">
+
+  <h6>Friends list</h6>
+  <% unless @friends.present? %>
+    <h7>No Friends in your list</h7>
+  <% else %>
+
+    <table style="width: 100%;">
+      <thead>
+         <tr>
+           <th>email</th>
+         </tr>
+      </thead>
+
+      <tbody>
+        <% @friends.each do |friend| %>
+          <tr>
+            <td><%= friend.email %></td>
+          </tr>
+        <% end %>
+      <tbody>
+    </table>
+  <% end %>
+
+  <br>
+  <h6>Group list</h6>
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#groupModal">
+    New Group
+  </button>
+  <% if @groups.present? %>
+    <table style="width: 100%;">
+      <thead>
+         <tr>
+           <th>Name</th>
+           <th></th>
+         </tr>
+      </thead>
+
+      <tbody>
+        <% @groups.each do |group| %>
+          <tr>
+          <td><%= group.name %></td>
+          <td><%= link_to "open", group_path(group.id)%></td>
+          </tr>
+        <% end %>
+      <tbody>
+    </table>
+  <% else %>
+  <% end %>
+
+  <br>
+  <% if @strangers.present? %>
+    <h6>People you may know!!!</h6>
+    <table style="width: 100%;">
+      <thead>
+         <tr>
+           <th>email</th>
+           <th>send request</th>
+         </tr>
+      </thead>
+
+      <tbody>
+        <% @strangers.each do |stranger| %>
+          <tr>
+            <td><%= stranger.email %></td>
+            <td><%= link_to "send", send_friend_request_dashboard_index_path(user_id: stranger.id), method: :post %></td>
+          </tr>
+        <% end %>
+      <tbody>
+    </table>
+  <% end %>
+
+  <br>
+  <h6>Friend Request!!!</h6>
+  <% if @requested_friends.present? %>
+    <table style="width: 100%;">
+      <thead>
+         <tr>
+           <th>email</th>
+           <th>send request</th>
+         </tr>
+      </thead>
+
+      <tbody>
+        <% @requested_friends.each do |requested_friend| %>
+          <tr>
+            <td><%= requested_friend.email %></td>
+            <td><%= link_to "accept", accept_friend_request_dashboard_index_path(user_id: requested_friend.id), method: :post %></td>
+          </tr>
+        <% end %>
+      <tbody>
+    </table>
+  <% else %>
+    <h7>No Friend Request!!!</h7>
+  <% end %>
+</div>
+<%= render "group_form"%>

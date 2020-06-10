@@ -6,7 +6,7 @@
       </div>
       <%if user_signed_in? %>
           <div class="col-md-2 text-right">
-            <%= link_to "Search", products_path, class: 'btn btn-primary align-left'%>
+            <%= link_to "Dashboard", dashboard_index_path, class: 'btn btn-primary align-left'%>
           </div>
           <div class="col-md-2 text-right">
             <%= link_to "Sign Out", destroy_user_session_path, method: :delete, class: 'btn btn-primary'%>
