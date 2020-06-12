@@ -10,18 +10,18 @@ class DashboardController < ApplicationController
   end
 
   def send_friend_request
-    current_user.send_friend_request(user)
+    current_user.send_friend_request(@user)
     redirect_to dashboard_index_path
   end
 
   def accept_friend_request
-    current_user.accept_friend_request(user)
+    current_user.accept_friend_request(@user)
     redirect_to dashboard_index_path
   end
 
   private
 
   def get_user
-    user = User.find_by_id(params[:user_id])
+    @user = User.find_by_id(params[:user_id])
   end
 end
