@@ -19,7 +19,6 @@ class GroupsController < ApplicationController
   end
 
   def add_member
-    binding.pry
     user = User.find_by_id(params[:user_id])
     @group = Group.find_by_id params[:id]
     user.user_groups.create(group: @group)
