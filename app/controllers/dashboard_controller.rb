@@ -1,4 +1,5 @@
 class DashboardController < ApplicationController
+  layout "dashboard"
   before_action :get_user, only: [:send_friend_request, :accept_friend_request]
 
   def index

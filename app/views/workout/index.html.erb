@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<button onClick="myTimer = setInterval(myCounter, 1000)">Start counter!</button>
+
+<p id="demo"></p>
+
+<button onClick="clearInterval(myTimer)">Stop counter!</button>
+
+<button id="submit_workout">Stop workout!</button>
+
+<script>
+var c = 0;
+function myCounter() {
+  document.getElementById("demo").innerHTML = ++c;
+}
+
+$('#submit_workout').on('click', function (e) {
+  var data = document.getElementById("demo").innerHTML;
+  $.ajax({
+    url  : '/workout/create_workout_sessions',
+    type : 'POST',
+    data : {
+      steps: data
+      // "_method":"pos"
+    },
+    dataType : 'json',
+    success  : function(response) {
+      window.location = "/workout/workout_profile?user_id=<%=current_user.id%>"
+        }
+    });
+})
+
+
+</script>
+
+</body>
+</html>

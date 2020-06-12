@@ -2,7 +2,18 @@ Rails.application.routes.draw do
   devise_for :users
 
   resources :home, only: [:index]
-  resources :groups, only: [:create, :show]
+  resources :workout, only: [:index] do
+    collection do
+      post :create_workout_sessions
+      get :workout_profile
+    end
+  end
+  resources :groups, only: [:create, :show] do
+    member do
+      post :create_post
+      post :add_member
+    end
+  end
   resources :dashboard, only: [:index] do
     collection do
       post :send_friend_request

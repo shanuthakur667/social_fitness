@@ -5,13 +5,15 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  has_many :posts
+  has_many :workout_sessions
   has_many :user_groups
   has_many :groups, through: :user_groups
 
   def strangers
     users = []
     User.all.each do |user|
-      if(self.friends_with?(user) != true && self != user &&       self.friends.include?(user) != true && self.pending_friends.include?(user) != true && self.requested_friends.include?(user) != true)
+      if(self.friends_with?(user) != true && self != user && self.friends.include?(user) != true && self.pending_friends.include?(user) != true && self.requested_friends.include?(user) != true)
         users << user
       end
     end
@@ -24,5 +26,18 @@ class User < ApplicationRecord
 
   def accept_friend_request(user)
     self.accept_request(user)
+  end
+
+  def baget
+    if total_steps > 500
+      'Silver'
+    elsif total_steps > 1000
+      'Gold'
+    elsif total_steps > 2000
+      'Platinume'
+    else
+      'N/A'
+    end
+
   end
 end

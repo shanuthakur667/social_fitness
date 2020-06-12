@@ -1,0 +1,45 @@
+<div class="row">
+  <div class="col-md-8">
+    <%= form_for Post.new, as: :post, url: create_post_group_path(@group), html: { class: "", id: "group_form" } do |f| %>
+      <div class="col-md-12">
+        <div class="col-md-12 form-group">
+          <label>Write post<span class="red">*</span></label>
+          <%= f.text_field :message, class: "form-control border-input", placeholder: "Post Something", required: true %>
+        </div>
+      </div>
+      <div class="text-center">
+        <button type="submit" class="btn btn-info btn-fill btn-wd">Post</button>
+      </div>
+    <% end %>
+
+    <hr>
+    <% @posts.each do |post|%>
+      <div style="color: blue">
+        <div>
+          <b><%= post.user.email%></b>
+        </div>
+        <div>
+          <p><%= post.message %></p>
+        </div>
+      </div>
+      <hr>
+    <% end %>
+  </div>
+  <div class="col-md-4">
+    <div>
+      <h6>Group Members</h6>
+      <%@group.users.each do |group_user|%>
+        <%= link_to "#{group_user.email}", workout_profile_workout_index_path(user_id: group_user.id)%>
+        <br>
+      <% end %>
+    </div>
+    <div>
+      <h6>Add Members</h6>
+      <%(current_user.friends - @group.users).each do |user|%>
+        <%= user.email%>
+        <%= link_to "Add", add_member_group_path(@group, user_id: user.id), method: :post%>
+        <br>
+      <% end %>
+    </div>
+  </div>
+</div>

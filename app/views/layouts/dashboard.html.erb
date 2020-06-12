@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>SocialFitness</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <%= render partial: "layouts/header"%>
+    <div class="row">
+      <div class="col-md-2" style="background-color: #00FFFF">
+        <%= render partial: "layouts/sidebar"%>
+      </div>
+      <div class="col-md-10">
+        <%= yield %>
+      </div>
+    </div>
+  </body>
+</html>
